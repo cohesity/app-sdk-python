@@ -14,8 +14,8 @@ The generated code uses Python packages named requests, jsonpickle and dateutil.
 You can resolve these dependencies using pip ( https://pip.pypa.io/en/stable/ ).
 This SDK uses the Requests library and will work for Python ```2 >=2.7.9``` and Python ```3 >=3.4```.
 
-  1. Invoke ```git clone https://github.com/cohesity/cohesity-apps-sdk-for-python.git```
-  2. ```cd cohesity-apps-sdk-for-python```
+  1. Invoke ```git clone https://github.com/cohesity/python-client.git```
+  2. ```cd cohesityAppSDK```
   2. Invoke ```pip install -r requirements.txt```
   3. Install cohesity_management_package: ```python setup.py install```. 
   This will install the package in PYTHONPATH.
