@@ -236,7 +236,4 @@ Endpoint Port etc before compilation.
  
 ## Questions or Feedback :
 
-We would love to hear from you. Please send your questions and feedback to: *apps@cohesity.com*
-
-
-
+We would love to hear from you. Please send your questions and feedback to: *developer@cohesity.com*
