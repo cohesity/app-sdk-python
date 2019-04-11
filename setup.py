@@ -13,7 +13,7 @@ setup(
     description='These APIs are available for apps running on Cohesity Apps Infrastructure.',
     long_description=long_description,
     author='Cohesity Apps Team',
-    author_email='apps@cohesity.com',
+    author_email='developer@cohesity.com',
     url='https://github.com/cohesity/',
     packages=find_packages(),
     install_requires=[
