@@ -1,13 +1,13 @@
-###Samples for Cohesity Management SDK 
+# Samples for Cohesity Management SDK 
 
 These samples showcase the combined capability of both *Cohesity Apps SDK* and *Cohesity Management SDK*. 
 Samples leverage *Cohesity App APIs* for seamless authentication without requiring login credentials from the end user.                                       
-### Prerequisites                                                             
+## Prerequisites                                                             
 
 These samples depend on *Cohesity Management SDK*, Installation steps, and other details can be found at https://github.com/cohesity/management-sdk-python.     
 Note: The samples do not have any dependency requirement if deployed through  *Cohesity EasyScript APP*
 
-###Samples
+## Samples
 
 ### Clone and Update a Cohesity View.
 [README](clone_and_update_view/README.md)
