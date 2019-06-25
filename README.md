@@ -56,46 +56,51 @@ app_client = AppClient(app_auth_token, app_endpoint_ip, app_endpoint_port)
 
 ```
 
-
 # Class Reference
 
 ## <a name="list_of_controllers"></a>List of Controllers
 
-* [MountController](#mount_controller)
-* [Settings](#settings)
+* [Volume](#volume)
 * [TokenManagement](#token_management)
+* [Settings](#settings)
+* [MountController](#mount_controller)
 
-## <a name="mount_controller"></a>![Class: ](https://apidocs.io/img/class.png ".MountController") MountController
+## <a name="volume"></a>![Class: ](https://apidocs.io/img/class.png ".Volume") Volume
 
 ### Get controller instance
 
-An instance of the ``` MountController ``` class can be accessed from the API Client.
+An instance of the ``` Volume ``` class can be accessed from the API Client.
 
 ```python
- mount = app_client.mount
+ volume_controller = client.volume
 ```
 
-### <a name="create_mount"></a>![Method: ](https://apidocs.io/img/method.png ".MountController.create_mount") create_mount
+### <a name="create_volume"></a>![Method: ](https://apidocs.io/img/method.png ".Volume.create_volume") create_volume
 
-> Allows you to mount a view/namespace.
+> Use this API to create a new kubernetes persistent volume backed up by cohesity view.
 
-```
-def create_mount(self, mount_options)
+```python
+def create_volume(self,
+                      volume_name,
+                      volume_spec)
 ```
 
 #### Parameters
 
-| Parameter |
-|-----------|
-| mountOptions | 
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| volumeName |  ``` Required ```  | Name of the volume unique within the app instance. |
+| volumeSpec |  ``` Required ```  | TODO: Add a parameter description |
 
 
 
 #### Example Usage
 
 ```python
-mount_options = MountOptions()
-mount.create_mount(mount_options)
+volume_name = 'volumeName'
+volume_spec = VolumeSpec()
+
+result = volume_controller.create_volume(volume_name, volume_spec)
 
 ```
 
@@ -103,34 +108,77 @@ mount.create_mount(mount_options)
 
 | Error Code | Error Description |
 |------------|-------------------|
-| 400 | Validation errors. |
-| 401 | Invalid token. |
+| 401 | Unauthorized. |
+| 409 | Volume already exists with different parameters. |
 | 500 | Unexpected error. |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
 
 
 
 
-### <a name="delete_unmount"></a>![Method: ](https://apidocs.io/img/method.png ".MountController.delete_unmount") delete_unmount
+### <a name="get_volume"></a>![Method: ](https://apidocs.io/img/method.png ".Volume.get_volume") get_volume
 
-> Unmount previously mounted view/namespace.
+> Gets the status of persistent volume owned by this app.
 
 ```python
-def delete_unmount(self, dir_name)
+def get_volume(self,
+                   volume_name)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| dirName |  ``` Required ```  | Name of the mount directory. |
+| volumeName |  ``` Required ```  | Name of the volume unique within the app instance. |
 
 
 
 #### Example Usage
 
 ```python
-dir_name = 'dirName'
-mount.delete_unmount(dir_name)
+volume_name = 'volumeName'
+
+result = volume_controller.get_volume(volume_name)
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 401 | Unauthorized |
+| 404 | Volume doesn't exist. |
+| 500 | Unexpected error |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
+
+
+
+
+### <a name="delete_volume"></a>![Method: ](https://apidocs.io/img/method.png ".Volume.delete_volume") delete_volume
+
+> Delete a previously created persistent volume owned by this app.
+
+```python
+def delete_volume(self,
+                      volume_name)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| volumeName |  ``` Required ```  | Name of the volume unique within the app instance. |
+
+
+
+#### Example Usage
+
+```python
+volume_name = 'volumeName'
+
+volume_controller.delete_volume(volume_name)
 
 ```
 
@@ -139,9 +187,51 @@ mount.delete_unmount(dir_name)
 | Error Code | Error Description |
 |------------|-------------------|
 | 400 | Invalid parameters. |
-| 401 | Invalid token. |
-| 404 | Directory doesn't exist. |
+| 401 | Unauthorized. |
+| 404 | Volume doesn't exist. |
 | 500 | Unexpected error. |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
+
+
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+## <a name="token_management"></a>![Class: ](https://apidocs.io/img/class.png ".TokenManagement") TokenManagement
+
+### Get controller instance
+
+An instance of the ``` TokenManagement ``` class can be accessed from the API Client.
+
+```python
+ token_management_controller = client.token_management
+```
+
+### <a name="create_management_access_token"></a>![Method: ](https://apidocs.io/img/method.png ".TokenManagement.create_management_access_token") create_management_access_token
+
+> Use this api to get a new management api token.
+
+```python
+def create_management_access_token(self)
+```
+
+#### Example Usage
+
+```python
+
+result = token_management_controller.create_management_access_token()
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 401 | Invalid token. |
+| 500 | Unexpected error. |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
 
 
 
@@ -155,7 +245,7 @@ mount.delete_unmount(dir_name)
 An instance of the ``` Settings ``` class can be accessed from the API Client.
 
 ```python
- settings_controller = app_client.settings
+ settings_controller = client.settings
 ```
 
 ### <a name="get_app_settings"></a>![Method: ](https://apidocs.io/img/method.png ".Settings.get_app_settings") get_app_settings
@@ -180,59 +270,105 @@ result = settings_controller.get_app_settings()
 |------------|-------------------|
 | 401 | Invalid token |
 | 500 | Unexpected error |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
 
 
 
 
 [Back to List of Controllers](#list_of_controllers)
 
-## <a name="token_management"></a>![Class: ](https://apidocs.io/img/class.png ".TokenManagement") TokenManagement
+## <a name="mount_controller"></a>![Class: ](https://apidocs.io/img/class.png ".MountController") MountController
 
 ### Get controller instance
 
-An instance of the ``` TokenManagement ``` class can be accessed from the API Client.
+An instance of the ``` MountController ``` class can be accessed from the API Client.
 
 ```python
- token_management = app_client.token_management
+ mount_controller = client.mount
 ```
 
-### <a name="create_management_access_token"></a>![Method: ](https://apidocs.io/img/method.png ".TokenManagement.create_management_access_token") create_management_access_token
+### <a name="delete_unmount"></a>![Method: ](https://apidocs.io/img/method.png ".MountController.delete_unmount") delete_unmount
 
-> Use this api to get a new management api token.
+> Unmount previously mounted view/namespace.
 
 ```python
-def create_management_access_token(self)
+def delete_unmount(self,
+                       dir_name)
 ```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| dirName |  ``` Required ```  | Name of the mount directory. |
+
+
 
 #### Example Usage
 
 ```python
-# This example shows interaction of management token got from App SDK to 
-# Cohesity Management SDK. 
-from cohesity_management_sdk.cohesity_client import CohesityClient
-token = token_management.create_management_access_token()
-cluster_ip = os.getenv('HOST_IP')
-cohesity_client = CohesityClient(cluster_vip=cluster_ip, auth_token=token)
-cohesity_client.cluster.get_basic_cluster_info() 
+dir_name = 'dirName'
+
+mount_controller.delete_unmount(dir_name)
+
 ```
 
 #### Errors
 
 | Error Code | Error Description |
 |------------|-------------------|
+| 400 | Invalid parameters. |
+| 401 | Invalid token. |
+| 404 | Directory doesn't exist. |
+| 500 | Unexpected error. |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
+
+
+
+
+### <a name="create_mount"></a>![Method: ](https://apidocs.io/img/method.png ".MountController.create_mount") create_mount
+
+> Allows you to mount a view/namespace.
+
+```python
+def create_mount(self,
+                     mount_options)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| mountOptions |  ``` Required ```  | TODO: Add a parameter description |
+
+
+
+#### Example Usage
+
+```python
+mount_options = MountOptions()
+
+mount_controller.create_mount(mount_options)
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 400 | Validation errors. |
 | 401 | Invalid token. |
 | 500 | Unexpected error. |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
 
 
-## Configure:
 
-The generated code will pick up the default configurations from 
-cohesity_app_sdk/configuration.py, hence, you 
-can use configuration.py to set the attributes such as App Endpoint IP, App 
-Endpoint Port etc before compilation.
- 
- Note : These parameters can be easily overwritten in scripts. Please refer 
- to sample_app.py
+
+[Back to List of Controllers](#list_of_controllers)
+
  
 ## Questions or Feedback :
 
