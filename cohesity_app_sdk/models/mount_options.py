@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Copyright 2019 Cohesity Inc.
 
 
 class MountOptions(object):
@@ -17,6 +18,8 @@ class MountOptions(object):
         password (string): Password if the mount type is smb.
         namespace_name (string): The namespace within the view that is to be
             mounted.
+        pod_uid (string): The UID of the pod on which the container is
+            running.
 
     """
 
@@ -28,7 +31,8 @@ class MountOptions(object):
         "mount_protocol":'mountProtocol',
         "user_name":'userName',
         "password":'password',
-        "namespace_name":'namespaceName'
+        "namespace_name":'namespaceName',
+        "pod_uid":'podUid'
     }
 
     def __init__(self,
@@ -38,7 +42,8 @@ class MountOptions(object):
                  mount_protocol=None,
                  user_name=None,
                  password=None,
-                 namespace_name=None):
+                 namespace_name=None,
+                 pod_uid=None):
         """Constructor for the MountOptions class"""
 
         # Initialize members of the class
@@ -49,6 +54,7 @@ class MountOptions(object):
         self.user_name = user_name
         self.password = password
         self.namespace_name = namespace_name
+        self.pod_uid = pod_uid
 
 
     @classmethod
@@ -76,6 +82,7 @@ class MountOptions(object):
         user_name = dictionary.get('userName')
         password = dictionary.get('password')
         namespace_name = dictionary.get('namespaceName')
+        pod_uid = dictionary.get('podUid')
 
         # Return an object of this model
         return cls(dir_name,
@@ -84,6 +91,7 @@ class MountOptions(object):
                    mount_protocol,
                    user_name,
                    password,
-                   namespace_name)
+                   namespace_name,
+                   pod_uid)
 
 

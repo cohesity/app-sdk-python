@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+# Copyright 2019 Cohesity Inc.
 
-from cohesity_app_sdk.api_helper import APIHelper
-from cohesity_app_sdk.http.http_context import HttpContext
-from cohesity_app_sdk.http.requests_client import RequestsClient
-from cohesity_app_sdk.exceptions.api_exception import APIException
+import json
+import jsonpickle
+from cohesity_management_sdk.api_helper import APIHelper
+from cohesity_management_sdk.http.http_context import HttpContext
+from cohesity_management_sdk.http.requests_client import RequestsClient
+from cohesity_management_sdk.exceptions.api_exception import APIException
 
 class BaseController(object):
 
@@ -26,7 +29,7 @@ class BaseController(object):
     http_call_back = None
 
     global_headers = {
-        'user-agent': 'app-Python-sdk-1.0.0'
+        'user-agent': 'cohesity-Python-sdk-1.1.0'
     }
 
     def __init__(self, client=None, call_back=None):
@@ -90,5 +93,9 @@ class BaseController(object):
             context (HttpContext): The HttpContext of the API call.
 
         """
-        if (context.response.status_code < 200) or (context.response.status_code > 208): #[200,208] = HTTP OK
-            raise APIException('HTTP response not OK.', context)
+        #CohesityPatch
+        if (context.response.status_code < 200) or (context.response.status_code > 208):  # [200,208] = HTTP OK
+            status = context.response.status_code
+            message = jsonpickle.decode(context.response.raw_body)['message']
+            raise_except = APIException('Response status code: %s, Response message: %s' % (status, message), context)
+            raise raise_except

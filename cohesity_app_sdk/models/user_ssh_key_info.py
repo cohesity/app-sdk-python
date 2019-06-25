@@ -2,33 +2,32 @@
 # Copyright 2019 Cohesity Inc.
 
 
-class User(object):
+class UserSshKeyInfo(object):
 
-    """Implementation of the 'User' model.
+    """Implementation of the 'UserSshKeyInfo' model.
 
-    Specifies user information who launched the given app instance.
+    Username and the ssh key for the user.
 
     Attributes:
-        domain (string): Domain of the user who launched the app instance.
-        user_name (string): Username of the user who launched the app
-            instance.
+        username (string): Username.
+        ssh_key (string): Ssh key for the user.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "domain":'domain',
-        "user_name":'userName'
+        "username":'username',
+        "ssh_key":'sshKey'
     }
 
     def __init__(self,
-                 domain=None,
-                 user_name=None):
-        """Constructor for the User class"""
+                 username=None,
+                 ssh_key=None):
+        """Constructor for the UserSshKeyInfo class"""
 
         # Initialize members of the class
-        self.domain = domain
-        self.user_name = user_name
+        self.username = username
+        self.ssh_key = ssh_key
 
 
     @classmethod
@@ -49,11 +48,11 @@ class User(object):
             return None
 
         # Extract variables from the dictionary
-        domain = dictionary.get('domain')
-        user_name = dictionary.get('userName')
+        username = dictionary.get('username')
+        ssh_key = dictionary.get('sshKey')
 
         # Return an object of this model
-        return cls(domain,
-                   user_name)
+        return cls(username,
+                   ssh_key)
 
 

@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
+# Copyright 2019 Cohesity Inc.
 
 import sys
 import logging
 
 from cohesity_app_sdk.api_helper import APIHelper
 
-logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
 
 
 class Configuration(object):
 
     """A class used for configuring the SDK by a user.
-
     This class need not be instantiated and all properties and methods
     are accessible without instance creation.
 
@@ -22,7 +22,7 @@ class Configuration(object):
     array_serialization = "indexed"
 
     # True if the client should skip verification of SSL certificates
-    skip_ssl_verification = False
+    skip_ssl_verification = True
 
     # An enum for SDK environments
     class Environment(object):

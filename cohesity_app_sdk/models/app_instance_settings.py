@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Copyright 2019 Cohesity Inc.
 
 import cohesity_app_sdk.models.view_privileges
 

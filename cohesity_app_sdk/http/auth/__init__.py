@@ -1,3 +1,3 @@
 __all__ = [
-    'custom_auth',
+    'o_auth_2',
 ]

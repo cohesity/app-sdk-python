@@ -1,5 +1,7 @@
-from setuptools import setup, find_packages
+# -*- coding: utf-8 -*-
+# Copyright 2019 Cohesity Inc.
 
+from setuptools import setup, find_packages
 # Try to convert markdown README to rst format for PyPI.
 try:
     import pypandoc
@@ -9,7 +11,7 @@ except(IOError, ImportError):
 
 setup(
     name='cohesity_app_sdk',
-    version='1.0.0',
+    version='1.1.0',
     description='These APIs are available for apps running on Cohesity Apps Infrastructure.',
     long_description=long_description,
     author='Cohesity Apps Team',

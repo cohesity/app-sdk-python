@@ -1,6 +1,7 @@
 __all__ = [
     'base_controller',
-    'mount_controller',
-    'settings',
+    'volume',
     'token_management',
+    'settings',
+    'mount_controller',
 ]

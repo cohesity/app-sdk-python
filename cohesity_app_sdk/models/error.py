@@ -2,33 +2,32 @@
 # Copyright 2019 Cohesity Inc.
 
 
-class User(object):
+class Error(object):
 
-    """Implementation of the 'User' model.
+    """Implementation of the 'Error' model.
 
-    Specifies user information who launched the given app instance.
+    Specifies more information in case of errors.
 
     Attributes:
-        domain (string): Domain of the user who launched the app instance.
-        user_name (string): Username of the user who launched the app
-            instance.
+        error_code (int): Type of the error.
+        message (string): Description of the error.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "domain":'domain',
-        "user_name":'userName'
+        "error_code":'errorCode',
+        "message":'message'
     }
 
     def __init__(self,
-                 domain=None,
-                 user_name=None):
-        """Constructor for the User class"""
+                 error_code=None,
+                 message=None):
+        """Constructor for the Error class"""
 
         # Initialize members of the class
-        self.domain = domain
-        self.user_name = user_name
+        self.error_code = error_code
+        self.message = message
 
 
     @classmethod
@@ -49,11 +48,11 @@ class User(object):
             return None
 
         # Extract variables from the dictionary
-        domain = dictionary.get('domain')
-        user_name = dictionary.get('userName')
+        error_code = dictionary.get('errorCode')
+        message = dictionary.get('message')
 
         # Return an object of this model
-        return cls(domain,
-                   user_name)
+        return cls(error_code,
+                   message)
 
 
