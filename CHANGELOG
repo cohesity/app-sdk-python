@@ -1,0 +1,16 @@
+# [1.1.0] - 2019-06-25
+New version of Cohesity App SDK is here!
+
+### Added 
+- This SDK now supports Cohesity DataPlatform 6.3+
+- New endpoint /volumes/{volumeName} to create a persistent volumes
+
+### Changed
+- Error:ErrorCode has changed from type:string to type:integer
+
+### Fixed
+- None
+ 
+### Removed
+- None
+
