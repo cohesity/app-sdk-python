@@ -8,13 +8,13 @@ class SysprepOperationEnum(object):
     TODO: type enum description here.
 
     Attributes:
-        KADDSSHKEY: TODO: type description here.
+        KADDUSERSSHKEY: TODO: type description here.
         KADDSWAPMOUNTPOINT: TODO: type description here.
         KADDVIRTIODRIVER: TODO: type description here.
 
     """
 
-    KADDSSHKEY = 'kAddSshKey'
+    KADDUSERSSHKEY = 'kAddUserSshKey'
 
     KADDSWAPMOUNTPOINT = 'kAddSwapMountPoint'
 
