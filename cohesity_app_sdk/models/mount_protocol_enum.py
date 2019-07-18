@@ -10,10 +10,13 @@ class MountProtocolEnum(object):
     Attributes:
         KNFS: TODO: type description here.
         KSMB: TODO: type description here.
+        KVOLUME: TODO: type description here.
 
     """
 
     KNFS = 'kNfs'
 
     KSMB = 'kSmb'
+
+    KVOLUME = 'kVolume'
 

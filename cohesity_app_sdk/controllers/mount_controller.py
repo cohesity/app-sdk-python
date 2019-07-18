@@ -21,7 +21,8 @@ class MountController(BaseController):
                        dir_name):
         """Does a DELETE request to /mounts/{dirName}.
 
-        Unmount previously mounted view/namespace.
+        Unmount previously mounted view/namespace or volume of a protected
+        entity.
 
         Args:
             dir_name (string): Name of the mount directory.
@@ -79,14 +80,17 @@ class MountController(BaseController):
                      mount_options):
         """Does a POST request to /mounts.
 
-        Allows you to mount a view/namespace.
+        Allows you to mount a cohesity external view or snapshots of a
+        protected object (VM volumes or NAS).
 
         Args:
             mount_options (MountOptions): TODO: type description here.
                 Example:
 
         Returns:
-            void: Response from the API. Mount operation is successful.
+            void: Response from the API. Mount operation is in progress.
+                Client should retry the mount call with same arguments till it
+                gets success before using the mount.
 
         Raises:
             APIException: When an error occurs while fetching the data from

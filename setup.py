@@ -11,7 +11,7 @@ except(IOError, ImportError):
 
 setup(
     name='cohesity_app_sdk',
-    version='1.1.0',
+    version='1.1.1',
     description='These APIs are available for apps running on Cohesity Apps Infrastructure.',
     long_description=long_description,
     author='Cohesity Apps Team',

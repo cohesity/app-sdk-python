@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2019 Cohesity Inc.
 
+import cohesity_app_sdk.models.protection_job_run
 
 class MountOptions(object):
 
@@ -9,15 +10,23 @@ class MountOptions(object):
     TODO: type model description here.
 
     Attributes:
-        dir_name (string): Directory where view/namespace is mounted.
-        view_name (string): The name of the view that is to be mounted.
+        dir_name (string): Directory where view/namespace or volume of a
+            protected source is mounted.
+        view_name (string): The name of the external cohesity view that is to
+            be mounted.
         mount_options (string): Additional options for mount. All options from
             mount command are supported e.g. rw, ro.
         mount_protocol (MountProtocolEnum): Type of the mount.
         user_name (string): Username if the mount type is smb.
         password (string): Password if the mount type is smb.
-        namespace_name (string): The namespace within the view that is to be
-            mounted.
+        namespace_name (string): If this type of mount is nfs this is the
+            namespace within the view that is to be mounted.
+        protected_source_id (int): If mounting snapshot of a protected source
+            this is the unique ID of the protected source.
+        protection_job_run (ProtectionJobRun): Identification of a protection
+            job run.
+        volume_name (string): Name of the volume of the VM to mount if the
+            protected source is of type VM.
         pod_uid (string): The UID of the pod on which the container is
             running.
 
@@ -32,6 +41,9 @@ class MountOptions(object):
         "user_name":'userName',
         "password":'password',
         "namespace_name":'namespaceName',
+        "protected_source_id":'protectedSourceId',
+        "protection_job_run":'protectionJobRun',
+        "volume_name":'volumeName',
         "pod_uid":'podUid'
     }
 
@@ -43,6 +55,9 @@ class MountOptions(object):
                  user_name=None,
                  password=None,
                  namespace_name=None,
+                 protected_source_id=None,
+                 protection_job_run=None,
+                 volume_name=None,
                  pod_uid=None):
         """Constructor for the MountOptions class"""
 
@@ -54,6 +69,9 @@ class MountOptions(object):
         self.user_name = user_name
         self.password = password
         self.namespace_name = namespace_name
+        self.protected_source_id = protected_source_id
+        self.protection_job_run = protection_job_run
+        self.volume_name = volume_name
         self.pod_uid = pod_uid
 
 
@@ -82,6 +100,9 @@ class MountOptions(object):
         user_name = dictionary.get('userName')
         password = dictionary.get('password')
         namespace_name = dictionary.get('namespaceName')
+        protected_source_id = dictionary.get('protectedSourceId')
+        protection_job_run = cohesity_app_sdk.models.protection_job_run.ProtectionJobRun.from_dictionary(dictionary.get('protectionJobRun')) if dictionary.get('protectionJobRun') else None
+        volume_name = dictionary.get('volumeName')
         pod_uid = dictionary.get('podUid')
 
         # Return an object of this model
@@ -92,6 +113,9 @@ class MountOptions(object):
                    user_name,
                    password,
                    namespace_name,
+                   protected_source_id,
+                   protection_job_run,
+                   volume_name,
                    pod_uid)
 
 

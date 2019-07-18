@@ -60,10 +60,62 @@ app_client = AppClient(app_auth_token, app_endpoint_ip, app_endpoint_port)
 
 ## <a name="list_of_controllers"></a>List of Controllers
 
+* [ProtectedSourceVolumeInfo](#protected_source_volume_info)
 * [Volume](#volume)
 * [TokenManagement](#token_management)
 * [Settings](#settings)
 * [MountController](#mount_controller)
+
+## <a name="protected_source_volume_info"></a>![Class: ](https://apidocs.io/img/class.png ".ProtectedSourceVolumeInfo") ProtectedSourceVolumeInfo
+
+### Get controller instance
+
+An instance of the ``` ProtectedSourceVolumeInfo ``` class can be accessed from the API Client.
+
+```python
+ protected_source_volume_info_controller = client.protected_source_volume_info
+```
+
+### <a name="get_protected_source_volume_info"></a>![Method: ](https://apidocs.io/img/method.png ".ProtectedSourceVolumeInfo.get_protected_source_volume_info") get_protected_source_volume_info
+
+> Gets the list of volumes for a snapshot of a protected source.
+
+```python
+def get_protected_source_volume_info(self,
+                                         source_id)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| sourceId |  ``` Required ```  | Unique ID of the protected source. |
+
+
+
+#### Example Usage
+
+```python
+source_id = 169
+
+result = protected_source_volume_info_controller.get_protected_source_volume_info(source_id)
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 401 | Unauthorized |
+| 404 | Snapshot does not exist. |
+| 500 | Unexpected error |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
+
+
+
+
+[Back to List of Controllers](#list_of_controllers)
 
 ## <a name="volume"></a>![Class: ](https://apidocs.io/img/class.png ".Volume") Volume
 
@@ -74,48 +126,6 @@ An instance of the ``` Volume ``` class can be accessed from the API Client.
 ```python
  volume_controller = client.volume
 ```
-
-### <a name="create_volume"></a>![Method: ](https://apidocs.io/img/method.png ".Volume.create_volume") create_volume
-
-> Use this API to create a new kubernetes persistent volume backed up by cohesity view.
-
-```python
-def create_volume(self,
-                      volume_name,
-                      volume_spec)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| volumeName |  ``` Required ```  | Name of the volume unique within the app instance. |
-| volumeSpec |  ``` Required ```  | TODO: Add a parameter description |
-
-
-
-#### Example Usage
-
-```python
-volume_name = 'volumeName'
-volume_spec = VolumeSpec()
-
-result = volume_controller.create_volume(volume_name, volume_spec)
-
-```
-
-#### Errors
-
-| Error Code | Error Description |
-|------------|-------------------|
-| 401 | Unauthorized. |
-| 409 | Volume already exists with different parameters. |
-| 500 | Unexpected error. |
-| 502 | Bad Gateway. |
-| 504 | Gateway Timeout. |
-
-
-
 
 ### <a name="get_volume"></a>![Method: ](https://apidocs.io/img/method.png ".Volume.get_volume") get_volume
 
@@ -189,6 +199,48 @@ volume_controller.delete_volume(volume_name)
 | 400 | Invalid parameters. |
 | 401 | Unauthorized. |
 | 404 | Volume doesn't exist. |
+| 500 | Unexpected error. |
+| 502 | Bad Gateway. |
+| 504 | Gateway Timeout. |
+
+
+
+
+### <a name="create_volume"></a>![Method: ](https://apidocs.io/img/method.png ".Volume.create_volume") create_volume
+
+> Use this API to create a new kubernetes persistent volume backed up by cohesity view.
+
+```python
+def create_volume(self,
+                      volume_name,
+                      volume_spec)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| volumeName |  ``` Required ```  | Name of the volume unique within the app instance. |
+| volumeSpec |  ``` Required ```  | TODO: Add a parameter description |
+
+
+
+#### Example Usage
+
+```python
+volume_name = 'volumeName'
+volume_spec = VolumeSpec()
+
+volume_controller.create_volume(volume_name, volume_spec)
+
+```
+
+#### Errors
+
+| Error Code | Error Description |
+|------------|-------------------|
+| 401 | Unauthorized. |
+| 409 | Volume already exists with different parameters. |
 | 500 | Unexpected error. |
 | 502 | Bad Gateway. |
 | 504 | Gateway Timeout. |
@@ -290,7 +342,7 @@ An instance of the ``` MountController ``` class can be accessed from the API Cl
 
 ### <a name="delete_unmount"></a>![Method: ](https://apidocs.io/img/method.png ".MountController.delete_unmount") delete_unmount
 
-> Unmount previously mounted view/namespace.
+> Unmount previously mounted view/namespace or volume of a protected entity.
 
 ```python
 def delete_unmount(self,
@@ -330,7 +382,7 @@ mount_controller.delete_unmount(dir_name)
 
 ### <a name="create_mount"></a>![Method: ](https://apidocs.io/img/method.png ".MountController.create_mount") create_mount
 
-> Allows you to mount a view/namespace.
+> Allows you to mount a cohesity external view or snapshots of a protected object (VM volumes or NAS).
 
 ```python
 def create_mount(self,
@@ -369,7 +421,5 @@ mount_controller.create_mount(mount_options)
 
 [Back to List of Controllers](#list_of_controllers)
 
- 
-## Questions or Feedback :
 
-We would love to hear from you. Please send your questions and feedback to: *developer@cohesity.com*
+

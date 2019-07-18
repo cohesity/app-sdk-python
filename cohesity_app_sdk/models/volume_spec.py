@@ -14,10 +14,9 @@ class VolumeSpec(object):
         volume_capacity_bytes (int): volume capacity
         volume_claim_ref (string): The specific persistent volume claim that
             will claim this volume.
-        disk_image_location (string): NFS path for disk image from which to
-            create volume
-        bundled_disk_image_name (string): Name of the disk image when creating
-            volume from a bundled disk image
+        disk_image_location (string): Path for disk image from which to create
+            volume. Can either be an absolute path or relative path in the
+            app's output view.
         disk_type (DiskTypeEnum): Disk type
         sysprep_operations (list of SysprepOperationEnum): Sequence of sysprep
             operations to be done on the disk
@@ -33,7 +32,6 @@ class VolumeSpec(object):
         "volume_capacity_bytes":'volumeCapacityBytes',
         "volume_claim_ref":'volumeClaimRef',
         "disk_image_location":'diskImageLocation',
-        "bundled_disk_image_name":'bundledDiskImageName',
         "disk_type":'diskType',
         "sysprep_operations":'sysprepOperations',
         "user_ssh_keys":'userSshKeys',
@@ -45,7 +43,6 @@ class VolumeSpec(object):
                  volume_capacity_bytes=None,
                  volume_claim_ref=None,
                  disk_image_location=None,
-                 bundled_disk_image_name=None,
                  disk_type=None,
                  sysprep_operations=None,
                  user_ssh_keys=None,
@@ -57,7 +54,6 @@ class VolumeSpec(object):
         self.volume_capacity_bytes = volume_capacity_bytes
         self.volume_claim_ref = volume_claim_ref
         self.disk_image_location = disk_image_location
-        self.bundled_disk_image_name = bundled_disk_image_name
         self.disk_type = disk_type
         self.sysprep_operations = sysprep_operations
         self.user_ssh_keys = user_ssh_keys
@@ -86,7 +82,6 @@ class VolumeSpec(object):
         volume_capacity_bytes = dictionary.get('volumeCapacityBytes')
         volume_claim_ref = dictionary.get('volumeClaimRef')
         disk_image_location = dictionary.get('diskImageLocation')
-        bundled_disk_image_name = dictionary.get('bundledDiskImageName')
         disk_type = dictionary.get('diskType')
         sysprep_operations = dictionary.get('sysprepOperations')
         user_ssh_keys = None
@@ -101,7 +96,6 @@ class VolumeSpec(object):
                    volume_capacity_bytes,
                    volume_claim_ref,
                    disk_image_location,
-                   bundled_disk_image_name,
                    disk_type,
                    sysprep_operations,
                    user_ssh_keys,
