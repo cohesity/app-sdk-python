@@ -1,8 +1,8 @@
 
 # [1.1.1] - 2019-07-18
 New version of Cohesity App SDK is here!
-#
-# ### Added
+
+### Added
 - Support for 6.4 Cohesity DataPlatform.
 - Support for creating VM based Apps
 ### Changed
