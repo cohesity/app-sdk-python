@@ -13,7 +13,7 @@ from cohesity_management_sdk.cohesity_client import CohesityClient
 # Get the Environment variables from App Container.
 app_auth_token = os.getenv('APP_AUTHENTICATION_TOKEN')
 app_endpoint_ip = os.getenv('APPS_API_ENDPOINT_IP')
-app_endpoint_port = os.getenv('APPS_API_ENDPOINT_IP')
+app_endpoint_port = os.getenv('APPS_API_ENDPOINT_PORT')
 
 
 # Initialize the client.
